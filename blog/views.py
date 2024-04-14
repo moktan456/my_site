@@ -5,3 +5,9 @@ from django.http import HttpResponse
 
 def index(request):
     return HttpResponse('Working from root')
+
+def allPosts(request):
+    return HttpResponse("All posts page working")
+
+def post_detail(request):
+    pass
