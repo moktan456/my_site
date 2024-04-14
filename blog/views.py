@@ -4,7 +4,8 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-    return HttpResponse('Working from root')
+    return render(request,'blog/index.html')
+    # return HttpResponse('Working from root')
 
 def allPosts(request):
     return HttpResponse("All posts page working")
