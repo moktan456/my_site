@@ -15,6 +15,8 @@ class Author(models.Model):
         verbose_name_plural = "Author Entries"
 class Tag(models.Model):
     caption = models.CharField(max_length=50)
+    def __str__(self):
+        return f"{self.caption}"
 class Post(models.Model):
     title = models.CharField(max_length=100)
     excerpt = models.CharField(max_length=200)
@@ -24,6 +26,8 @@ class Post(models.Model):
     content = models.TextField(validators=[MinLengthValidator(10)])
     author = models.ForeignKey(Author,null=True,on_delete=models.SET_NULL,related_name="posts")
     tag = models.ManyToManyField(Tag)
+    def __str__(self):
+        return f"{self.title}"
 
 
    
