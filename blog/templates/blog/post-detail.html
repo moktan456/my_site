@@ -10,6 +10,16 @@
 
 
 {% block content %}
+{% comment %} To alert the errors  {% endcomment %}
+{% if comment_form.erros %}
+    <div id="alert">
+        <h2>
+            Saving the comment failed!
+        </h2>
+        <p>Please check the comment form and fix your errors</p>
+    <a href="#comment_form">Fix!</a>
+    </div>
+{% endif %}
 <section id="summary">
 <h2>
     {{post.title}}
@@ -29,8 +39,23 @@
     </div>
 </article>
 </section>
+
 <main>
     {{post.content|linebreaks}}
 </main>
+<section id="comment-form">
+    <h2>Your comment</h2>
+    <form action="{%url "post-detail" post.slug%}" method="POST">
+        {% csrf_token %}
+       {%for form_field in comment_form%}
+       <div class="form-control {% if form_field.errors %}invalid{% endif %}">
+            {{form_field.label_tag}}
+            {{form_field}}
+            {{form_field.errors}}
+       </div>
+       {%endfor%}
+        <button>Save comment</button>
+    </form>
+</section>
 
 {% endblock content %}
